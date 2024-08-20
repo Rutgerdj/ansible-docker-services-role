@@ -1,0 +1,18 @@
+---
+- name: Set service variable
+  ansible.builtin.set_fact:
+    service_name: "{{ project_file.path | dirname | basename }}"
+
+- name: Create directory for config files for {{ service_name }}
+  become: true
+  ansible.builtin.file:
+    path: "/apps/docker/{{ service_name }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "755"
+
+- name: Docker compose up for {{ service_name }}
+  community.docker.docker_compose_v2:
+    state: present
+    project_src: "{{ project_file.path | dirname }}"

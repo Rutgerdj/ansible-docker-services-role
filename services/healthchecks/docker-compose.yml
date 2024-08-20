@@ -1,0 +1,16 @@
+services:
+  healthchecks:
+    image: lscr.io/linuxserver/healthchecks:latest
+    container_name: healthchecks
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - SITE_ROOT=http://{{ ansible_host }}:{{ healthchecks.port }}
+      - SITE_NAME="Cron Healthcheck"
+      - DEBUG=False
+      - SUPERUSER_EMAIL={{ healthchecks.email }}
+      - SUPERUSER_PASSWORD={{ healthchecks.password }}
+    ports:
+      - "{{ healthchecks.port }}:8000"
+    restart: unless-stopped

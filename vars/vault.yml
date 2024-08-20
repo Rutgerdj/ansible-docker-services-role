@@ -1,0 +1,15 @@
+firefly:
+  app_key: thisisnotmyrealpassword
+  db_password: thisisalsonotmyrealpassword
+  port: 8003
+
+healthchecks:
+  email: thisisnot@myreal.email
+  password: thisisalsonotreal
+  port: 8002
+
+mealie:
+  port: 9925
+
+dozzle:
+  port: 8880
